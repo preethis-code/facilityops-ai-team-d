@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agentic FacilityOps AI Platform | Dashboard</title>
+  <meta name="description" content="AI-powered facility operations dashboard for autonomous energy, maintenance, and occupancy management.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="dashboard-wrapper">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="brand">
+          <div class="brand-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <span>FacilityOps AI</span>
+        </div>
+      </div>
+
+      <nav style="flex: 1; overflow-y: auto;">
+        <ul class="sidebar-menu">
+          <li class="menu-label">Main</li>
+          <li class="sidebar-menu-item" id="menu-overview" data-view="view-overview">
+            <a href="#" id="nav-overview">
+              <div class="sidebar-menu-item-link-content">
+                <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                <span>Overview</span>
+              </div>
+            </a>
+          </li>
+          <li class="sidebar-menu-item active" id="menu-dashboard" data-view="view-dashboard">
+            <a href="#" id="nav-dashboard">
+              <div class="sidebar-menu-item-link-content">
+                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"></rect><rect x="14" y="3" width="7" height="5" rx="1"></rect><rect x="14" y="12" width="7" height="9" rx="1"></rect><rect x="3" y="16" width="7" height="5" rx="1"></rect></svg>
+                <span>Dashboard</span>
+              </div>
+            </a>
+          </li>
+          <li class="sidebar-menu-item" id="menu-ai-agents" data-view="view-ai-agents">
+            <a href="#" id="nav-ai-agents">
+              <div class="sidebar-menu-item-link-content">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+                <span>AI Agents</span>
+              </div>
+            </a>
+          </li>
+          <li class="sidebar-menu-item" id="menu-modules" data-view="view-modules">
+            <a href="#" id="nav-modules">
+              <div class="sidebar-menu-item-link-content">
+                <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                <span>Modules</span>
+              </div>
+            </a>
+          </li>
+          <li class="sidebar-menu-item" id="menu-work-orders" data-view="view-work-orders">
+            <a href="#" id="nav-work-orders">
+              <div class="sidebar-menu-item-link-content">
+                <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+                <span>Work Orders</span>
+              </div>
+            </a>
+          </li>
+          <li class="sidebar-menu-item" id="menu-assets" data-view="view-assets">
+            <a href="#" id="nav-assets">
+              <div class="sidebar-menu-item-link-content">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                <span>Assets</span>
+              </div>
+            </a>
+          </li>
+          <li class="sidebar-menu-item" id="menu-monitoring" data-view="view-monitoring">
+            <a href="#" id="nav-monitoring">
+              <div class="sidebar-menu-item-link-content">
+                <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+                <span>Monitoring</span>
+              </div>
+            </a>
+          </li>
+
+          <li class="menu-label">Autonomous Agents</li>
+          <li class="sidebar-menu-item" id="menu-energy" data-view="view-energy">
+            <a href="#" id="nav-energy">
+              <div class="sidebar-menu-item-link-content">
+                <svg viewBox="0 0 24 24">
+                  <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                </svg>
+                <span>Energy Agent</span>
+              </div>
+              <span class="status-dot pulse" style="background-color: var(--color-accent); margin-right: 4px;" title="Active"></span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item" id="menu-maintenance" data-view="view-maintenance">
+            <a href="#" id="nav-maintenance">
+              <div class="sidebar-menu-item-link-content">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path>
+                </svg>
+                <span>Maintenance</span>
+              </div>
+              <span class="status-dot pulse" style="background-color: var(--color-warning); margin-right: 4px;" title="Active"></span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item" id="menu-occupancy" data-view="view-occupancy">
+            <a href="#" id="nav-occupancy">
+              <div class="sidebar-menu-item-link-content">
+                <svg viewBox="0 0 24 24">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+                <span>Occupancy</span>
+              </div>
+              <span class="status-dot pulse" style="background-color: var(--color-success); margin-right: 4px;" title="Active"></span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item" id="menu-security" data-view="view-security">
+            <a href="#" id="nav-security">
+              <div class="sidebar-menu-item-link-content">
+                <svg viewBox="0 0 24 24">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                </svg>
+                <span>Security Agent</span>
+              </div>
+              <span class="status-dot pulse" style="background-color: #8B5CF6; margin-right: 4px;" title="Active"></span>
+            </a>
+          </li>
+
+          <li class="menu-label">Analytics &amp; Admin</li>
+          <li class="sidebar-menu-item" id="menu-analytics" data-view="view-analytics">
+            <a href="#" id="nav-analytics">
+              <div class="sidebar-menu-item-link-content">
+                <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                <span>Analytics</span>
+              </div>
+            </a>
+          </li>
+          <li class="sidebar-menu-item" id="menu-reports" data-view="view-reports">
+            <a href="#" id="nav-reports">
+              <div class="sidebar-menu-item-link-content">
+                <svg viewBox="0 0 24 24">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                  <polyline points="14 2 14 8 20 8"></polyline>
+                  <line x1="16" y1="13" x2="8" y2="13"></line>
+                  <line x1="16" y1="17" x2="8" y2="17"></line>
+                </svg>
+                <span>Reports</span>
+              </div>
+            </a>
+          </li>
+          <li class="sidebar-menu-item" id="menu-alerts" data-view="view-alerts">
+            <a href="#" id="nav-alerts">
+              <div class="sidebar-menu-item-link-content">
+                <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                <span>Alerts</span>
+              </div>
+            </a>
+          </li>
+          <li class="sidebar-menu-item" id="menu-schedules" data-view="view-schedules">
+            <a href="#" id="nav-schedules">
+              <div class="sidebar-menu-item-link-content">
+                <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                <span>Schedules</span>
+              </div>
+            </a>
+          </li>
+          <li class="sidebar-menu-item" id="menu-integrations" data-view="view-integrations">
+            <a href="#" id="nav-integrations">
+              <div class="sidebar-menu-item-link-content">
+                <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+                <span>Integrations</span>
+              </div>
+            </a>
+          </li>
+          <li class="sidebar-menu-item" id="menu-settings" data-view="view-settings">
+            <a href="#" id="nav-settings">
+              <div class="sidebar-menu-item-link-content">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="3"></circle>
+                  <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                </svg>
+                <span>Settings</span>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="system-status-indicator">
+          <span class="status-dot pulse"></span>
+          <span class="font-medium text-sm text-muted">3 Agents Operational</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Panel -->
+    <main class="main-panel">
+      <!-- Topbar Navigation -->
+      <header class="topbar">
+        <div style="display: flex; align-items: center; gap: var(--space-2);">
+          <button class="menu-toggle-btn" id="menu-toggle" aria-label="Toggle Navigation Sidebar">
+            <svg viewBox="0 0 24 24">
+              <line x1="3" y1="12" x2="21" y2="12"></line>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+          </button>
+          
+          <div class="topbar-search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="text" class="topbar-search-input" placeholder="Search facilities, recommendations, logs..." id="main-search">
+          </div>
+        </div>
+
+        <div class="topbar-actions">
+          <button class="topbar-btn" id="theme-toggle" aria-label="Toggle Dark/Light Mode">
+            <svg class="theme-icon-moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+            <svg class="theme-icon-sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+          </button>
+
+          <button class="topbar-btn" aria-label="Notifications" id="notifications-btn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+            <div class="topbar-btn-badge" id="notifications-badge">3</div>
+          </button>
+
+          <div class="user-profile">
+            <div class="avatar" title="Team D Profile">TD</div>
+            <div class="user-info">
+              <span class="user-name">Team D</span>
+              <span class="user-role">Facility Operations Lead</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- ================================================================
+           VIEW: DASHBOARD (default)
+           ================================================================ -->
+      <section class="dashboard-content agent-view" id="view-dashboard">
+        <!-- Welcome Banner -->
+        <div class="welcome-section">
+          <div class="welcome-info">
+            <h1>Welcome back, Team D</h1>
+            <p class="text-sm text-muted">Here is what the autonomous agent fleet has done for your building today.</p>
+          </div>
+          <div class="welcome-date" id="live-date">Wednesday, July 8, 2026</div>
+        </div>
+
+        <!-- 4 KPI Cards Grid -->
+        <div class="kpis-grid">
+          <div class="card kpi-card">
+            <div class="kpi-title-row">
+              <span>Energy Usage (Daily)</span>
+              <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            </div>
+            <div>
+              <div class="kpi-value" id="kpi-energy">42,850 kWh</div>
+              <div class="kpi-trend trend-down">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline>
+                </svg>
+                <span>4.2% vs last week</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card kpi-card">
+            <div class="kpi-title-row">
+              <span>Utility Cost (M-T-D)</span>
+              <svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+            </div>
+            <div>
+              <div class="kpi-value" id="kpi-cost">$5,142.00</div>
+              <div class="kpi-trend trend-down">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline>
+                </svg>
+                <span>3.8% vs last week</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card kpi-card">
+            <div class="kpi-title-row">
+              <span>Carbon Footprint</span>
+              <svg viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+            </div>
+            <div>
+              <div class="kpi-value" id="kpi-carbon">18.2 Tons CO₂</div>
+              <div class="kpi-trend trend-down">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline>
+                </svg>
+                <span>5.1% vs last week</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card kpi-card">
+            <div class="kpi-title-row">
+              <span>Active Alerts</span>
+              <svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            </div>
+            <div>
+              <div class="kpi-value" id="kpi-alerts">3 Active</div>
+              <div class="kpi-trend trend-neutral">
+                <span>1 Critical, 2 Warnings</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Dashboard Grid -->
+        <div class="dashboard-grid">
+          <!-- Column 1: Chart & Console -->
+          <div class="grid-column">
+            <article class="card">
+              <div class="chart-card-header">
+                <h2 class="card-title">Energy Consumption Overview</h2>
+                <div class="chart-tabs">
+                  <button class="chart-tab active" id="tab-7d">Last 7 Days</button>
+                  <button class="chart-tab" id="tab-30d">Last 30 Days</button>
+                </div>
+              </div>
+              <div class="chart-container" id="chart-parent">
+                <svg class="chart-svg" viewBox="0 0 800 250" preserveAspectRatio="none">
+                  <defs>
+                    <linearGradient id="chart-gradient" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="var(--color-accent)" stop-opacity="0.25"/>
+                      <stop offset="100%" stop-color="var(--color-accent)" stop-opacity="0.0"/>
+                    </linearGradient>
+                  </defs>
+                  <line class="chart-grid-line" x1="50" y1="40" x2="770" y2="40"></line>
+                  <line class="chart-grid-line" x1="50" y1="90" x2="770" y2="90"></line>
+                  <line class="chart-grid-line" x1="50" y1="140" x2="770" y2="140"></line>
+                  <line class="chart-grid-line" x1="50" y1="190" x2="770" y2="190"></line>
+                  <line class="chart-axis-line" x1="50" y1="210" x2="770" y2="210"></line>
+                  <text class="chart-axis-text" x="15" y="44">80k</text>
+                  <text class="chart-axis-text" x="15" y="94">60k</text>
+                  <text class="chart-axis-text" x="15" y="144">40k</text>
+                  <text class="chart-axis-text" x="15" y="194">20k</text>
+                  <text class="chart-axis-text" x="20" y="214">0</text>
+                  <text class="chart-axis-text" x="80" y="230" text-anchor="middle">Mon</text>
+                  <text class="chart-axis-text" x="190" y="230" text-anchor="middle">Tue</text>
+                  <text class="chart-axis-text" x="300" y="230" text-anchor="middle">Wed</text>
+                  <text class="chart-axis-text" x="410" y="230" text-anchor="middle">Thu</text>
+                  <text class="chart-axis-text" x="520" y="230" text-anchor="middle">Fri</text>
+                  <text class="chart-axis-text" x="630" y="230" text-anchor="middle">Sat</text>
+                  <text class="chart-axis-text" x="740" y="230" text-anchor="middle">Sun</text>
+                  <path class="chart-line-gradient" id="chart-area-path" d="M 80 140 L 190 115 L 300 135 L 410 80 L 520 100 L 630 160 L 740 148 L 740 210 L 80 210 Z"></path>
+                  <path class="chart-line" id="chart-stroke-path" d="M 80 140 L 190 115 L 300 135 L 410 80 L 520 100 L 630 160 L 740 148"></path>
+                  <circle class="chart-node" cx="80" cy="140" data-value="48,200 kWh" data-day="Monday"></circle>
+                  <circle class="chart-node" cx="190" cy="115" data-value="52,400 kWh" data-day="Tuesday"></circle>
+                  <circle class="chart-node" cx="300" cy="135" data-value="49,100 kWh" data-day="Wednesday"></circle>
+                  <circle class="chart-node" cx="410" cy="80" data-value="61,800 kWh" data-day="Thursday"></circle>
+                  <circle class="chart-node" cx="520" cy="100" data-value="56,200 kWh" data-day="Friday"></circle>
+                  <circle class="chart-node" cx="630" cy="160" data-value="41,200 kWh" data-day="Saturday"></circle>
+                  <circle class="chart-node" cx="740" cy="148" data-value="44,800 kWh" data-day="Sunday"></circle>
+                </svg>
+                <div class="chart-tooltip" id="chart-tooltip"></div>
+              </div>
+            </article>
+
+            <article class="card console-card">
+              <div class="console-header">
+                <div class="console-title-wrap">
+                  <div class="brand-icon" style="background-color: var(--color-accent); width: 28px; height: 28px;">
+                    <svg viewBox="0 0 24 24" style="width: 14px; height: 14px;">
+                      <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                    </svg>
+                  </div>
+                  <h2 class="card-title">Agent Console</h2>
+                  <span class="badge badge-success">Live</span>
+                </div>
+                <div style="font-size: 0.75rem; color: var(--color-text-secondary); display: flex; gap: var(--space-2);">
+                  <span>CPU: <strong>12%</strong></span>
+                  <span>RAM: <strong>1.4 GB</strong></span>
+                </div>
+              </div>
+              <div class="console-container" id="console-log">
+                <div class="console-line">
+                  <span class="console-time">[18:49:50]</span>
+                  <span class="console-agent">EnergyAgent:</span>
+                  <span class="console-text">Agent framework loaded. Spawning cognitive analysis loops...</span>
+                </div>
+                <div class="console-line">
+                  <span class="console-time">[18:49:52]</span>
+                  <span class="console-agent">EnergyAgent:</span>
+                  <span class="console-text">Link established with BACnet router [Gateway-09]. Scanning HVAC controllers...</span>
+                </div>
+                <div class="console-line">
+                  <span class="console-time">[18:49:55]</span>
+                  <span class="console-agent">EnergyAgent:</span>
+                  <span class="console-text highlight">Scan complete: 28 air handling units (AHUs) responsive. 3 chiller loops syncing.</span>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <!-- Column 2: Recommendations, Zones, Alerts -->
+          <div class="grid-column">
+            <article class="card">
+              <div class="card-header">
+                <h2 class="card-title">AI Actions Recommended</h2>
+                <span class="badge badge-primary" id="actions-count">2 Available</span>
+              </div>
+              <div class="recommendations-list">
+                <div class="recommendation-item" id="rec-hvac">
+                  <div class="recommendation-info">
+                    <div class="recommendation-icon">
+                      <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                    </div>
+                    <div class="recommendation-details">
+                      <span class="recommendation-text">Set back Zone B temperature by 1.5°F during low occupancy.</span>
+                      <div class="recommendation-meta">
+                        <span class="recommendation-savings">Est. Savings: 140 kWh/d</span>
+                        <span>•</span>
+                        <span>HVAC Policy</span>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="btn btn-secondary btn-sm" onclick="applyRecommendation('rec-hvac', 140, 18.2)">
+                    <span class="btn-loader"></span>
+                    <span class="btn-text-content">Apply</span>
+                  </button>
+                </div>
+
+                <div class="recommendation-item" id="rec-chiller">
+                  <div class="recommendation-info">
+                    <div class="recommendation-icon">
+                      <svg viewBox="0 0 24 24"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                    </div>
+                    <div class="recommendation-details">
+                      <span class="recommendation-text">Optimize chiller staging logic for ambient wet-bulb forecast.</span>
+                      <div class="recommendation-meta">
+                        <span class="recommendation-savings">Est. Savings: 220 kWh/d</span>
+                        <span>•</span>
+                        <span>Chiller Loops</span>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="btn btn-secondary btn-sm" onclick="applyRecommendation('rec-chiller', 220, 28.6)">
+                    <span class="btn-loader"></span>
+                    <span class="btn-text-content">Apply</span>
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card-header">
+                <h2 class="card-title">Zone Health Overview</h2>
+                <span class="text-xs text-muted">Updated 2m ago</span>
+              </div>
+              <div class="facility-zones-list">
+                <div class="zone-item">
+                  <div class="zone-header-wrap">
+                    <div class="zone-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg></div>
+                    <div class="zone-details">
+                      <span class="zone-name">Zone A (East Wing)</span>
+                      <span class="zone-sub">Offices &amp; Finance</span>
+                    </div>
+                  </div>
+                  <div class="zone-stats">
+                    <span class="zone-temp">71.8°F</span>
+                    <span class="badge badge-success">Healthy</span>
+                  </div>
+                </div>
+                <div class="zone-item">
+                  <div class="zone-header-wrap">
+                    <div class="zone-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg></div>
+                    <div class="zone-details">
+                      <span class="zone-name">Zone B (West Wing)</span>
+                      <span class="zone-sub">R&amp;D Labs &amp; Sales</span>
+                    </div>
+                  </div>
+                  <div class="zone-stats">
+                    <span class="zone-temp" id="zone-b-temp">74.2°F</span>
+                    <span class="badge badge-warning" id="zone-b-status">Optimizing</span>
+                  </div>
+                </div>
+                <div class="zone-item">
+                  <div class="zone-header-wrap">
+                    <div class="zone-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg></div>
+                    <div class="zone-details">
+                      <span class="zone-name">Zone C (Data Center)</span>
+                      <span class="zone-sub">Main Server Racks</span>
+                    </div>
+                  </div>
+                  <div class="zone-stats">
+                    <span class="zone-temp">68.5°F</span>
+                    <span class="badge badge-danger">Attention</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="card">
+              <div class="card-header">
+                <h2 class="card-title">Recent Alerts</h2>
+                <span class="text-xs text-muted" id="alerts-count-text">3 Active</span>
+              </div>
+              <div class="alerts-list" id="alerts-container">
+                <div class="alert-item critical" id="alert-1">
+                  <div class="alert-item-body">
+                    <span class="alert-desc">Data Center CRAC unit secondary backup fan offline. High vibration detected.</span>
+                    <span class="alert-time">12 mins ago • Zone C Cooling</span>
+                  </div>
+                  <button class="alert-dismiss-btn" onclick="dismissAlert('alert-1')" aria-label="Dismiss Alert">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                  </button>
+                </div>
+                <div class="alert-item warning" id="alert-2">
+                  <div class="alert-item-body">
+                    <span class="alert-desc">Standby power usage in West Wing exceeded standard baselines for 2 consecutive hours.</span>
+                    <span class="alert-time">45 mins ago • Standby Load</span>
+                  </div>
+                  <button class="alert-dismiss-btn" onclick="dismissAlert('alert-2')" aria-label="Dismiss Alert">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                  </button>
+                </div>
+                <div class="alert-item info" id="alert-3">
+                  <div class="alert-item-body">
+                    <span class="alert-desc">Energy Agent triggered regular chiller optimization cycle. Baseline calibrated.</span>
+                    <span class="alert-time">2 hours ago • System Audit</span>
+                  </div>
+                  <button class="alert-dismiss-btn" onclick="dismissAlert('alert-3')" aria-label="Dismiss Alert">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                  </button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <!-- Agent Fleet Configuration -->
+        <div style="margin-top: var(--space-3); margin-bottom: var(--space-2);">
+          <h2 class="text-lg font-bold" style="margin-bottom: var(--space-15); letter-spacing: -0.02em;">Agent Fleet Configuration</h2>
+          <div class="fleet-grid">
+            <article class="card fleet-card" id="fleet-energy" style="cursor:pointer;" onclick="navigateToView('view-energy')">
+              <div class="fleet-card-header">
+                <div class="fleet-card-icon"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>
+                <span class="badge badge-success">Active</span>
+              </div>
+              <div class="fleet-card-info">
+                <h3>Energy Agent</h3>
+                <p>Balances HVAC setbacks, chiller loading sequencing, and lighting grids to reduce demand charges.</p>
+              </div>
+              <div class="fleet-card-footer">
+                <span class="text-xs text-muted">Allocated CPU: 4 cores</span>
+                <span class="text-xs text-primary font-medium">Open →</span>
+              </div>
+            </article>
+
+            <article class="card fleet-card" id="fleet-maintenance" style="cursor:pointer;" onclick="navigateToView('view-maintenance')">
+              <div class="fleet-card-header">
+                <div class="fleet-card-icon" style="background-color: rgba(245,158,11,0.1); color: var(--color-warning);">
+                  <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                </div>
+                <span class="badge badge-warning">Active</span>
+              </div>
+              <div class="fleet-card-info">
+                <h3>Maintenance Agent</h3>
+                <p>Analyzes compressor vibration anomalies, predicts filter failures, and coordinates maintenance ticketing.</p>
+              </div>
+              <div class="fleet-card-footer">
+                <span class="text-xs text-muted">14 HVAC nodes synced</span>
+                <span class="text-xs font-medium" style="color: var(--color-warning);">Open →</span>
+              </div>
+            </article>
+
+            <article class="card fleet-card" id="fleet-occupancy" style="cursor:pointer;" onclick="navigateToView('view-occupancy')">
+              <div class="fleet-card-header">
+                <div class="fleet-card-icon" style="background-color: rgba(16,185,129,0.1); color: var(--color-success);">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                  </svg>
+                </div>
+                <span class="badge badge-success">Active</span>
+              </div>
+              <div class="fleet-card-info">
+                <h3>Occupancy Agent</h3>
+                <p>Monitors desk density, counts cafeteria occupancy via thermal sensors, and structures ventilation rates.</p>
+              </div>
+              <div class="fleet-card-footer">
+                <span class="text-xs text-muted">32 sensors mapped</span>
+                <span class="text-xs font-medium" style="color: var(--color-success);">Open →</span>
+              </div>
+            </article>
+
+            <article class="card fleet-card" id="fleet-security" style="cursor:pointer;" onclick="navigateToView('view-security')">
+              <div class="fleet-card-header">
+                <div class="fleet-card-icon" style="background-color: rgba(139,92,246,0.1); color: #8B5CF6;"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg></div>
+                <span class="badge badge-success">Active</span>
+              </div>
+              <div class="fleet-card-info">
+                <h3>Security Agent</h3>
+                <p>Identifies open access doors, scans thermal boundaries, and alerts guards to unexpected entries during off-hours.</p>
+              </div>
+              <div class="fleet-card-footer">
+                <span class="text-xs text-muted">12 feeds active</span>
+                <span class="text-xs font-medium" style="color: #8B5CF6;">Open →</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           VIEW: ENERGY AGENT (Enhanced)
+           ================================================================ -->
+      <section class="dashboard-content agent-view" id="view-energy" style="display:none;">
+        <div class="welcome-section">
+          <div class="welcome-info">
+            <div style="display:flex; align-items:center; gap: var(--space-15); margin-bottom: 6px;">
+              <div class="brand-icon" style="background: linear-gradient(135deg,var(--color-primary),var(--color-accent)); width:36px; height:36px;">
+                <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+              </div>
+              <h1>Energy Agent</h1>
+              <span class="badge badge-success" style="font-size:0.8125rem;">● Active</span>
+            </div>
+            <p class="text-sm text-muted">Autonomous energy optimization — HVAC, chillers, lighting, and demand management.</p>
+          </div>
+          <div class="welcome-date" id="energy-date"></div>
+        </div>
+
+        <!-- Energy KPIs -->
+        <div class="kpis-grid energy-kpis-grid">
+          <!-- Monthly Performance Card -->
+          <div class="card kpi-card monthly-perf-card">
+            <div class="monthly-perf-header">
+              <span class="monthly-perf-title">Monthly Performance</span>
+              <span class="badge badge-primary">Active Period</span>
+            </div>
+            <div class="monthly-perf-body">
+              <div class="monthly-perf-metric">
+                <span class="metric-label">Energy Savings</span>
+                <span class="metric-value text-success" id="energy-savings-val">12.4%</span>
+                <span class="metric-sub text-muted">↓ vs. baseline target</span>
+              </div>
+              <div class="monthly-perf-divider"></div>
+              <div class="monthly-perf-metric">
+                <span class="metric-label">Cost Savings</span>
+                <span class="metric-value text-success" id="cost-savings-val">$1,842</span>
+                <span class="metric-sub text-muted">vs. $2,200 target</span>
+              </div>
+              <div class="monthly-perf-divider"></div>
+              <div class="monthly-perf-metric">
+                <span class="metric-label">Forecast Accuracy</span>
+                <span class="metric-value" id="forecast-accuracy-val">94.7%</span>
+                <span class="metric-sub text-muted">+1.2% vs last month</span>
+              </div>
+            </div>
+          </div>
+          <!-- Peak Demand Avoided -->
+          <div class="card kpi-card">
+            <div class="kpi-title-row"><span>Peak Demand Avoided</span>
+              <svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            </div>
+            <div>
+              <div class="kpi-value">186 kW</div>
+              <div class="kpi-trend trend-down"><span>Today's reduction</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Energy 30-day Trend Chart + Key Insights -->
+        <div class="dashboard-grid">
+          <div class="grid-column">
+            <!-- 30-day Energy Trend Chart -->
+            <article class="card">
+              <div class="chart-card-header">
+                <h2 class="card-title">30-Day Energy Trend</h2>
+                <span class="badge badge-primary">kWh / day</span>
+              </div>
+              <div class="chart-container" id="energy-30d-chart-parent" style="height:220px;">
+                <svg class="chart-svg" viewBox="0 0 800 220" preserveAspectRatio="none" id="energy-30d-svg">
+                  <defs>
+                    <linearGradient id="energy-gradient-30d" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="var(--color-accent)" stop-opacity="0.3"/>
+                      <stop offset="100%" stop-color="var(--color-accent)" stop-opacity="0.0"/>
+                    </linearGradient>
+                  </defs>
+                  <line class="chart-grid-line" x1="50" y1="30" x2="790" y2="30"></line>
+                  <line class="chart-grid-line" x1="50" y1="75" x2="790" y2="75"></line>
+                  <line class="chart-grid-line" x1="50" y1="120" x2="790" y2="120"></line>
+                  <line class="chart-grid-line" x1="50" y1="165" x2="790" y2="165"></line>
+                  <line class="chart-axis-line" x1="50" y1="185" x2="790" y2="185"></line>
+                  <text class="chart-axis-text" x="5" y="34">70k</text>
+                  <text class="chart-axis-text" x="5" y="79">55k</text>
+                  <text class="chart-axis-text" x="5" y="124">40k</text>
+                  <text class="chart-axis-text" x="5" y="169">25k</text>
+                  <!-- Path generated by JS -->
+                  <path class="chart-line-gradient" id="energy-30d-area"></path>
+                  <path class="chart-line" id="energy-30d-line" style="stroke: var(--color-accent);"></path>
+                  <!-- Nodes generated by JS -->
+                  <g id="energy-30d-nodes"></g>
+                  <!-- X labels generated by JS -->
+                  <g id="energy-30d-xlabels"></g>
+                </svg>
+                <div class="chart-tooltip" id="energy-30d-tooltip"></div>
+              </div>
+            </article>
+
+            <!-- Connected Assets -->
+            <article class="card">
+              <div class="card-header">
+                <h2 class="card-title">Connected Assets</h2>
+                <span class="badge badge-success">All Online</span>
+              </div>
+              <div class="asset-grid">
+                <div class="asset-item">
+                  <div class="asset-icon" style="background: var(--color-accent-tint); color: var(--color-accent);">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+                  </div>
+                  <div class="asset-info">
+                    <span class="asset-count">28</span>
+                    <span class="asset-label">HVAC Systems</span>
+                  </div>
+                </div>
+                <div class="asset-item">
+                  <div class="asset-icon" style="background: rgba(251,191,36,0.1); color: #FBBF24;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line></svg>
+                  </div>
+                  <div class="asset-info">
+                    <span class="asset-count">64</span>
+                    <span class="asset-label">Lighting Zones</span>
+                  </div>
+                </div>
+                <div class="asset-item">
+                  <div class="asset-icon" style="background: rgba(16,185,129,0.1); color: var(--color-success);">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+                  </div>
+                  <div class="asset-info">
+                    <span class="asset-count">3</span>
+                    <span class="asset-label">Chiller Loops</span>
+                  </div>
+                </div>
+                <div class="asset-item">
+                  <div class="asset-icon" style="background: rgba(139,92,246,0.1); color: #8B5CF6;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"></rect><line x1="3" y1="10" x2="21" y2="10"></line><path d="M7 15l2 2 4-4"></path></svg>
+                  </div>
+                  <div class="asset-info">
+                    <span class="asset-count">12</span>
+                    <span class="asset-label">Smart Meters</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="grid-column">
+            <!-- Energy Schedules -->
+            <article class="card">
+              <div class="card-header">
+                <h2 class="card-title">Schedules</h2>
+                <span class="badge badge-success">On track</span>
+              </div>
+              <div style="display:flex; flex-direction:column; gap: var(--space-15);">
+                <div class="insight-item">
+                  <div class="insight-dot" style="background: var(--color-success);"></div>
+                  <div><span class="text-sm font-medium">Daily Chiller Pre-cool</span><br><span class="text-xs text-muted">04:00 AM - 06:00 AM</span></div>
+                </div>
+                <div class="insight-item">
+                  <div class="insight-dot" style="background: var(--color-accent);"></div>
+                  <div><span class="text-sm font-medium">Lighting Setback</span><br><span class="text-xs text-muted">08:00 PM - 05:00 AM</span></div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="grid-column">
+            <!-- Top AI Recommendations -->
+            <article class="card">
+              <div class="card-header">
+                <h2 class="card-title">Top Recommendations</h2>
+                <span class="badge badge-primary" id="energy-actions-count">3 Available</span>
+              </div>
+              <div class="recommendations-list">
+                <div class="recommendation-item" id="erec-hvac">
+                  <div class="recommendation-info">
+                    <div class="recommendation-icon">
+                      <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line></svg>
+                    </div>
+                    <div class="recommendation-details">
+                      <span class="recommendation-text">Optimize HVAC Runtime in Zone A by 18%</span>
+                      <div class="recommendation-meta">
+                        <span class="recommendation-savings">Save: 95 kWh/d</span><span>•</span><span>HVAC</span>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="btn btn-secondary btn-sm" onclick="applyEnergyRec('erec-hvac', 95, 12.4, 'HVAC runtime optimized for Zone A. Setpoints updated.')">
+                    <span class="btn-loader"></span><span class="btn-text-content">Apply</span>
+                  </button>
+                </div>
+                <div class="recommendation-item" id="erec-lighting">
+                  <div class="recommendation-info">
+                    <div class="recommendation-icon" style="background: rgba(251,191,36,0.1); color:#FBBF24;">
+                      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line></svg>
+                    </div>
+                    <div class="recommendation-details">
+                      <span class="recommendation-text">Dim underused lighting zones in Level 3 North</span>
+                      <div class="recommendation-meta">
+                        <span class="recommendation-savings">Save: 42 kWh/d</span><span>•</span><span>Lighting</span>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="btn btn-secondary btn-sm" onclick="applyEnergyRec('erec-lighting', 42, 5.5, 'Lighting dimmed 40% in Level 3 North. 8 zones updated.')">
+                    <span class="btn-loader"></span><span class="btn-text-content">Apply</span>
+                  </button>
+                </div>
+                <div class="recommendation-item" id="erec-chiller-set">
+                  <div class="recommendation-info">
+                    <div class="recommendation-icon" style="background: rgba(16,185,129,0.1); color: var(--color-success);">
+                      <svg viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+                    </div>
+                    <div class="recommendation-details">
+                      <span class="recommendation-text">Adjust Chiller #2 setpoints to 44°F for wet-bulb conditions</span>
+                      <div class="recommendation-meta">
+                        <span class="recommendation-savings">Save: 78 kWh/d</span><span>•</span><span>Chiller</span>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="btn btn-secondary btn-sm" onclick="applyEnergyRec('erec-chiller-set', 78, 10.1, 'Chiller #2 setpoint adjusted to 44°F. Staging logic recalculated.')">
+                    <span class="btn-loader"></span><span class="btn-text-content">Apply</span>
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            <!-- Key Insights -->
+            <article class="card">
+              <div class="card-header">
+                <h2 class="card-title">Key Insights</h2>
+                <span class="text-xs text-muted">AI Generated</span>
+              </div>
+              <div style="display:flex; flex-direction:column; gap: var(--space-15);">
+                <div class="insight-item">
+                  <div class="insight-dot" style="background: var(--color-success);"></div>
+                  <div><span class="text-sm font-medium">Peak demand reduced by 22% this month</span><br><span class="text-xs text-muted">Load shifting during 2–5 PM window saved $340</span></div>
+                </div>
+                <div class="insight-item">
+                  <div class="insight-dot" style="background: var(--color-accent);"></div>
+                  <div><span class="text-sm font-medium">Chiller efficiency at 94.2% COP this week</span><br><span class="text-xs text-muted">Above industry standard of 88% — optimal performance</span></div>
+                </div>
+                <div class="insight-item">
+                  <div class="insight-dot" style="background: var(--color-warning);"></div>
+                  <div><span class="text-sm font-medium">Zone B HVAC runtime spike on Tuesday</span><br><span class="text-xs text-muted">Outdoor temp 91°F caused 18% above normal load</span></div>
+                </div>
+                <div class="insight-item">
+                  <div class="insight-dot" style="background: var(--color-success);"></div>
+                  <div><span class="text-sm font-medium">Lighting automation saved 12 kWh daily avg.</span><br><span class="text-xs text-muted">Occupancy-based dimming active in 42 zones</span></div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Energy Agent Console -->
+            <article class="card console-card">
+              <div class="console-header">
+                <div class="console-title-wrap">
+                  <div class="brand-icon" style="background-color: var(--color-accent); width: 28px; height: 28px;">
+                    <svg viewBox="0 0 24 24" style="width: 14px; height: 14px;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                  </div>
+                  <h2 class="card-title">Energy Agent Console</h2>
+                  <span class="badge badge-success">Active</span>
+                </div>
+              </div>
+              <div class="console-container" id="energy-console-log">
+                <div class="console-line">
+                  <span class="console-time">[Boot]</span>
+                  <span class="console-agent">EnergyAgent:</span>
+                  <span class="console-text">Monitoring 28 HVAC, 64 lighting zones, 3 chiller loops, 12 smart meters.</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           VIEW: MAINTENANCE AGENT
+           ================================================================ -->
+      <section class="dashboard-content agent-view" id="view-maintenance" style="display:none;">
+        <div class="welcome-section">
+          <div class="welcome-info">
+            <div style="display:flex; align-items:center; gap: var(--space-15); margin-bottom: 6px;">
+              <div class="brand-icon" style="background: linear-gradient(135deg,#D97706,#F59E0B); width:36px; height:36px;">
+                <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2.5"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+              </div>
+              <h1>Maintenance Agent</h1>
+              <span class="badge badge-warning" style="font-size:0.8125rem;">● Running</span>
+            </div>
+            <p class="text-sm text-muted">Predictive maintenance — anomaly detection, failure prediction, and automated work order management.</p>
+          </div>
+          <div style="display:flex; flex-direction:column; align-items:flex-end; gap: 4px;">
+            <span class="text-xs text-muted">Last Updated</span>
+            <span class="text-sm font-semibold" id="maint-last-updated">2 minutes ago</span>
+          </div>
+        </div>
+
+        <!-- Maintenance KPIs -->
+        <div class="kpis-grid">
+          <!-- Status Card -->
+          <div class="card kpi-card">
+            <div class="kpi-title-row">
+              <span>Agent Status</span>
+              <span class="badge badge-warning" style="background-color: rgba(245,158,11,0.1); color: var(--color-warning); font-size: 0.75rem;">● Running</span>
+            </div>
+            <div>
+              <div class="kpi-value" style="color: var(--color-warning);">Agent Running</div>
+              <div class="kpi-trend trend-neutral">
+                <span>Last Updated: </span><span id="maint-status-updated">2 mins ago</span>
+              </div>
+            </div>
+          </div>
+          <!-- MTBF Improvement -->
+          <div class="card kpi-card">
+            <div class="kpi-title-row"><span>MTBF Improvement</span>
+              <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+            </div>
+            <div>
+              <div class="kpi-value" style="color: var(--color-success);">+31%</div>
+              <div class="kpi-trend trend-down"><span>vs. 6-month baseline</span></div>
+            </div>
+          </div>
+          <!-- Work Orders Closed -->
+          <div class="card kpi-card">
+            <div class="kpi-title-row"><span>Work Orders Closed</span>
+              <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+            <div>
+              <div class="kpi-value" id="kpi-maint-closed">47</div>
+              <div class="kpi-trend trend-down"><span>This month</span></div>
+            </div>
+          </div>
+          <!-- Downtime Reduced -->
+          <div class="card kpi-card">
+            <div class="kpi-title-row"><span>Downtime Reduced</span>
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            </div>
+            <div>
+              <div class="kpi-value" style="color: var(--color-success);">18.5%</div>
+              <div class="kpi-trend trend-down"><span>Hours saved: 42h MTD</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Maintenance Grid -->
+        <div class="dashboard-grid">
+          <div class="grid-column">
+            <!-- Maintenance Performance Chart -->
+            <article class="card">
+              <div class="chart-card-header">
+                <h2 class="card-title">Maintenance Performance (30 Days)</h2>
+                <span class="badge badge-primary">Work Orders</span>
+              </div>
+              <div class="chart-container" id="maint-chart-parent" style="height:220px;">
+                <svg class="chart-svg" viewBox="0 0 800 220" preserveAspectRatio="none">
+                  <defs>
+                    <linearGradient id="maint-grad-1" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="var(--color-warning)" stop-opacity="0.3"/>
+                      <stop offset="100%" stop-color="var(--color-warning)" stop-opacity="0"/>
+                    </linearGradient>
+                    <linearGradient id="maint-grad-2" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="var(--color-success)" stop-opacity="0.3"/>
+                      <stop offset="100%" stop-color="var(--color-success)" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <line class="chart-grid-line" x1="50" y1="30" x2="790" y2="30"></line>
+                  <line class="chart-grid-line" x1="50" y1="80" x2="790" y2="80"></line>
+                  <line class="chart-grid-line" x1="50" y1="130" x2="790" y2="130"></line>
+                  <line class="chart-grid-line" x1="50" y1="170" x2="790" y2="170"></line>
+                  <line class="chart-axis-line" x1="50" y1="185" x2="790" y2="185"></line>
+                  <text class="chart-axis-text" x="8" y="34">20</text>
+                  <text class="chart-axis-text" x="8" y="84">15</text>
+                  <text class="chart-axis-text" x="8" y="134">10</text>
+                  <text class="chart-axis-text" x="8" y="174">5</text>
+                  <!-- Work orders opened line (warning) -->
+                  <path class="chart-line-gradient" id="maint-area-1" style="fill: url(#maint-grad-1);"></path>
+                  <path class="chart-line" id="maint-line-1" style="stroke: var(--color-warning);"></path>
+                  <!-- Completed tasks line (success) -->
+                  <path class="chart-line" id="maint-line-2" style="stroke: var(--color-success); stroke-dasharray: 6,3;"></path>
+                  <g id="maint-nodes"></g>
+                  <g id="maint-xlabels"></g>
+                </svg>
+                <div class="chart-legend" id="maint-legend">
+                  <div class="legend-item"><span class="legend-dot" style="background:var(--color-warning);"></span><span class="text-xs text-muted">Work Orders</span></div>
+                  <div class="legend-item"><span class="legend-dot" style="background:var(--color-success); border-style: dashed;"></span><span class="text-xs text-muted">Completed</span></div>
+                </div>
+                <div class="chart-tooltip" id="maint-tooltip"></div>
+              </div>
+            </article>
+
+            <!-- Recent Work Orders -->
+            <article class="card">
+              <div class="card-header">
+                <h2 class="card-title">Recent Work Orders</h2>
+                <span class="badge badge-warning">5 Open</span>
+              </div>
+              <div style="display:flex; flex-direction:column; gap: var(--space-15);">
+                <div class="work-order-item">
+                  <div class="work-order-info">
+                    <span class="work-order-id">#WO-2847</span>
+                    <span class="text-sm font-medium">AHU-14 Filter Replacement</span>
+                    <span class="text-xs text-muted">Zone B • Assigned: Tech Team Alpha</span>
+                  </div>
+                  <span class="badge badge-warning">In Progress</span>
+                </div>
+                <div class="work-order-item">
+                  <div class="work-order-info">
+                    <span class="work-order-id">#WO-2841</span>
+                    <span class="text-sm font-medium">Pump P-07 Bearing Inspection</span>
+                    <span class="text-xs text-muted">Mechanical Room 2 • Assigned: Tech Team Beta</span>
+                  </div>
+                  <span class="badge badge-danger">Urgent</span>
+                </div>
+                <div class="work-order-item">
+                  <div class="work-order-info">
+                    <span class="work-order-id">#WO-2839</span>
+                    <span class="text-sm font-medium">Chiller #1 Vibration Check</span>
+                    <span class="text-xs text-muted">Basement Plant • Assigned: Senior Tech</span>
+                  </div>
+                  <span class="badge badge-warning">Scheduled</span>
+                </div>
+                <div class="work-order-item">
+                  <div class="work-order-info">
+                    <span class="work-order-id">#WO-2835</span>
+                    <span class="text-sm font-medium">Cooling Tower Fan Belt Replacement</span>
+                    <span class="text-xs text-muted">Rooftop Unit 3 • Assigned: Tech Team Alpha</span>
+                  </div>
+                  <span class="badge badge-success">Completed</span>
+                </div>
+                <div class="work-order-item">
+                  <div class="work-order-info">
+                    <span class="work-order-id">#WO-2831</span>
+                    <span class="text-sm font-medium">BMS Sensor Calibration — Zone C</span>
+                    <span class="text-xs text-muted">Data Center • Assigned: Controls Engineer</span>
+                  </div>
+                  <span class="badge badge-success">Completed</span>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="grid-column">
+            <!-- Maintenance Schedules -->
+            <article class="card">
+              <div class="card-header">
+                <h2 class="card-title">Maintenance Schedules</h2>
+                <span class="badge badge-warning">2 Upcoming</span>
+              </div>
+              <div style="display:flex; flex-direction:column; gap: var(--space-15);">
+                <div class="insight-item">
+                  <div class="insight-dot" style="background: var(--color-warning);"></div>
+                  <div><span class="text-sm font-medium">Generator Test</span><br><span class="text-xs text-muted">Tomorrow, 09:00 AM</span></div>
+                </div>
+                <div class="insight-item">
+                  <div class="insight-dot" style="background: var(--color-accent);"></div>
+                  <div><span class="text-sm font-medium">HVAC Filter Replacement</span><br><span class="text-xs text-muted">Friday, 02:00 PM</span></div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="grid-column">
+            <!-- Top Predictions -->
+            <article class="card">
+              <div class="card-header">
+                <h2 class="card-title">Top Failure Predictions</h2>
+                <span class="badge badge-danger">3 Critical</span>
+              </div>
+              <div class="recommendations-list">
+                <div class="recommendation-item" id="mpred-ahu">
+                  <div class="recommendation-info">
+                    <div class="recommendation-icon" style="background: rgba(245,158,11,0.1); color: var(--color-warning);">
+                      <svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                    </div>
+                    <div class="recommendation-details">
+                      <span class="recommendation-text">AHU-14 Filter Replacement — overdue 3 days</span>
+                      <div class="recommendation-meta">
+                        <span class="recommendation-savings">Risk: High</span><span>•</span><span>AHU • Zone B</span>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="btn btn-secondary btn-sm" onclick="applyMaintRec('mpred-ahu', 'AHU-14 filter replacement work order created and dispatched to Tech Team Alpha.')">
+                    <span class="btn-loader"></span><span class="btn-text-content">Dispatch</span>
+                  </button>
+                </div>
+                <div class="recommendation-item" id="mpred-pump">
+                  <div class="recommendation-info">
+                    <div class="recommendation-icon" style="background: rgba(239,68,68,0.1); color: var(--color-danger);">
+                      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+                    </div>
+                    <div class="recommendation-details">
+                      <span class="recommendation-text">Pump P-07 bearing wear anomaly detected</span>
+                      <div class="recommendation-meta">
+                        <span style="color: var(--color-danger); font-weight:600;">Risk: Critical</span><span>•</span><span>Vibration Alert</span>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="btn btn-secondary btn-sm" onclick="applyMaintRec('mpred-pump', 'Pump P-07 bearing inspection scheduled. Vibration dampeners ordered from inventory.')">
+                    <span class="btn-loader"></span><span class="btn-text-content">Dispatch</span>
+                  </button>
+                </div>
+                <div class="recommendation-item" id="mpred-chiller">
+                  <div class="recommendation-info">
+                    <div class="recommendation-icon" style="background: rgba(239,68,68,0.1); color: var(--color-danger);">
+                      <svg viewBox="0 0 24 24"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+                    </div>
+                    <div class="recommendation-details">
+                      <span class="recommendation-text">Chiller #3 elevated vibration — failure window 5–7 days</span>
+                      <div class="recommendation-meta">
+                        <span style="color: var(--color-danger); font-weight:600;">Risk: Critical</span><span>•</span><span>Chiller Plant</span>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="btn btn-secondary btn-sm" onclick="applyMaintRec('mpred-chiller', 'Chiller #3 flagged for immediate inspection. Spare compressor on standby mode.')">
+                    <span class="btn-loader"></span><span class="btn-text-content">Dispatch</span>
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            <!-- Asset Health Summary -->
+            <article class="card">
+              <div class="card-header">
+                <h2 class="card-title">Asset Health Summary</h2>
+                <span class="text-xs text-muted">Real-time scan</span>
+              </div>
+              <div style="display:flex; flex-direction:column; gap: var(--space-15);">
+                <div class="health-bar-item">
+                  <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                    <span class="text-sm font-medium">Healthy Assets</span>
+                    <span class="text-sm font-semibold" style="color: var(--color-success);">68 / 86</span>
+                  </div>
+                  <div class="health-bar-track">
+                    <div class="health-bar-fill" style="width:79%; background: var(--color-success);"></div>
+                  </div>
+                </div>
+                <div class="health-bar-item">
+                  <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                    <span class="text-sm font-medium">Needs Attention</span>
+                    <span class="text-sm font-semibold" style="color: var(--color-warning);">13 / 86</span>
+                  </div>
+                  <div class="health-bar-track">
+                    <div class="health-bar-fill" style="width:15%; background: var(--color-warning);"></div>
+                  </div>
+                </div>
+                <div class="health-bar-item">
+                  <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+                    <span class="text-sm font-medium">Critical / Offline</span>
+                    <span class="text-sm font-semibold" style="color: var(--color-danger);">5 / 86</span>
+                  </div>
+                  <div class="health-bar-track">
+                    <div class="health-bar-fill" style="width:6%; background: var(--color-danger);"></div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="margin-top: var(--space-2); border-top: 1px solid var(--color-border-light); padding-top: var(--space-2);">
+                <h3 class="text-sm font-semibold" style="margin-bottom: var(--space-15);">Critical Assets</h3>
+                <div style="display:flex; flex-direction:column; gap:10px;">
+                  <div class="critical-asset-row">
+                    <span class="status-dot" style="background: var(--color-danger);"></span>
+                    <div>
+                      <span class="text-sm font-medium">Chiller #3 — Compressor</span>
+                      <p class="text-xs text-muted">High vibration signature detected. Risk: bearing seizure within 5d.</p>
+                    </div>
+                  </div>
+                  <div class="critical-asset-row">
+                    <span class="status-dot" style="background: var(--color-danger);"></span>
+                    <div>
+                      <span class="text-sm font-medium">Pump P-07 — Main Loop</span>
+                      <p class="text-xs text-muted">Bearing wear index 87%. Replacement recommended immediately.</p>
+                    </div>
+                  </div>
+                  <div class="critical-asset-row">
+                    <span class="status-dot" style="background: var(--color-warning);"></span>
+                    <div>
+                      <span class="text-sm font-medium">AHU-14 — Zone B</span>
+                      <p class="text-xs text-muted">Filter ΔP exceeded limit. Airflow reduced 22%. Replace within 3d.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Key Insights -->
+            <article class="card">
+              <div class="card-header">
+                <h2 class="card-title">Key Insights</h2>
+                <span class="text-xs text-muted">AI Generated</span>
+              </div>
+              <div style="display:flex; flex-direction:column; gap: var(--space-15);">
+                <div class="insight-item">
+                  <div class="insight-dot" style="background: var(--color-success);"></div>
+                  <div><span class="text-sm font-medium">Predictive maintenance prevented 9 failures</span><br><span class="text-xs text-muted">Estimated avoided cost: $84,000 this quarter</span></div>
+                </div>
+                <div class="insight-item">
+                  <div class="insight-dot" style="background: var(--color-accent);"></div>
+                  <div><span class="text-sm font-medium">Spare parts inventory optimized by 34%</span><br><span class="text-xs text-muted">AI pre-ordered 12 items before stock-out event</span></div>
+                </div>
+                <div class="insight-item">
+                  <div class="insight-dot" style="background: var(--color-success);"></div>
+                  <div><span class="text-sm font-medium">Response time reduced from 4.2h → 1.8h</span><br><span class="text-xs text-muted">Auto-dispatch routing improved MTTR by 57%</span></div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Maintenance Console -->
+            <article class="card console-card">
+              <div class="console-header">
+                <div class="console-title-wrap">
+                  <div class="brand-icon" style="background: linear-gradient(135deg,#D97706,#F59E0B); width: 28px; height: 28px;">
+                    <svg viewBox="0 0 24 24" style="width: 14px; height: 14px;"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" fill="none" stroke="white" stroke-width="2.5"></path></svg>
+                  </div>
+                  <h2 class="card-title">Maintenance Agent Console</h2>
+                  <span class="badge badge-warning">Running</span>
+                </div>
+              </div>
+              <div class="console-container" id="maint-console-log">
+                <div class="console-line">
+                  <span class="console-time">[Boot]</span>
+                  <span class="console-agent" style="color: var(--color-warning);">MaintenanceAgent:</span>
+                  <span class="console-text">Agent initialized. Scanning 86 assets across facility nodes...</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           VIEW: OCCUPANCY AGENT
+           ================================================================ -->
+      <section class="dashboard-content agent-view" id="view-occupancy" style="display:none;">
+        <div class="welcome-section">
+          <div class="welcome-info">
+            <div style="display:flex; align-items:center; gap: var(--space-15); margin-bottom: 6px;">
+              <div class="brand-icon" style="background: linear-gradient(135deg,#059669,#10B981); width:36px; height:36px;">
+                <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:none;stroke:#fff;stroke-width:2.5">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="9" cy="7" r="4"></circle>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+              </div>
+              <h1>Occupancy Agent</h1>
+              <span class="badge badge-success" style="font-size:0.8125rem;">● Running</span>
+            </div>
+            <p class="text-sm text-muted">Space utilization intelligence — sensor-driven occupancy, layout optimization, and forecast analytics.</p>
+          </div>
+          <div style="display:flex; flex-direction:column; align-items:flex-end; gap: 4px;">
+            <span class="text-xs text-muted">Last Updated</span>
+            <span class="text-sm font-semibold" id="occ-last-updated">Just now</span>
+          </div>
+        </div>
+
+        <!-- Occupancy KPIs -->
+        <div class="kpis-grid">
+          <!-- Status Card -->
+          <div class="card kpi-card">
+            <div class="kpi-title-row">
+              <span>Agent Status</span>
+              <span class="badge badge-success" style="background-color: rgba(16,185,129,0.1); color: var(--color-success); font-size: 0.75rem;">● Running</span>
+            </div>
+            <div>
+              <div class="kpi-value" style="color: var(--color-success);">Running</div>
+              <div class="kpi-trend trend-neutral">
+                <span>Last Updated: </span><span id="occ-status-updated">Just now</span>
+              </div>
+            </div>
+          </div>
+          <!-- Space Utilization -->
+          <div class="card kpi-card">
+            <div class="kpi-title-row"><span>Space Utilization</span>
+              <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>
+            </div>
+            <div>
+              <div class="kpi-value" id="kpi-space-util">68.4%</div>
+              <div class="kpi-trend trend-up"><span>+3.2% vs last week</span></div>
+            </div>
+          </div>
+          <!-- Space Optimization -->
+          <div class="card kpi-card">
+            <div class="kpi-title-row"><span>Space Optimization</span>
+              <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+            <div>
+              <div class="kpi-value" style="color: var(--color-success);">82.1%</div>
+              <div class="kpi-trend trend-down"><span>+5.6% improvement</span></div>
+            </div>
+          </div>
+          <!-- Forecast Accuracy -->
+          <div class="card kpi-card">
+            <div class="kpi-title-row"><span>Forecast Accuracy</span>
+              <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+            </div>
+            <div>
+              <div class="kpi-value">91.3%</div>
+              <div class="kpi-trend trend-down"><span>vs. 88% target</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Occupancy Main Grid -->
+        <div class="dashboard-grid">
+          <div class="grid-column">
+            <!-- Occupancy Trend Chart -->
+            <article class="card">
+              <div class="chart-card-header">
+                <h2 class="card-title">Space Utilization Trend (30 Days)</h2>
+                <span class="badge badge-primary">% Utilized</span>
+              </div>
+              <div class="chart-container" id="occ-chart-parent" style="height:220px;">
+                <svg class="chart-svg" viewBox="0 0 800 220" preserveAspectRatio="none">
+                  <defs>
+                    <linearGradient id="occ-gradient" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0%" stop-color="var(--color-success)" stop-opacity="0.3"/>
+                      <stop offset="100%" stop-color="var(--color-success)" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <line class="chart-grid-line" x1="50" y1="30" x2="790" y2="30"></line>
+                  <line class="chart-grid-line" x1="50" y1="75" x2="790" y2="75"></line>
+                  <line class="chart-grid-line" x1="50" y1="120" x2="790" y2="120"></line>
+                  <line class="chart-grid-line" x1="50" y1="165" x2="790" y2="165"></line>
+                  <line class="chart-axis-line" x1="50" y1="185" x2="790" y2="185"></line>
+                  <text class="chart-axis-text" x="5" y="34">100%</text>
+                  <text class="chart-axis-text" x="8" y="79">75%</text>
+                  <text class="chart-axis-text" x="8" y="124">50%</text>
+                  <text class="chart-axis-text" x="8" y="169">25%</text>
+                  <path class="chart-line-gradient" id="occ-area" style="fill: url(#occ-gradient);"></path>
+                  <path class="chart-line" id="occ-line" style="stroke: var(--color-success);"></path>
+                  <g id="occ-nodes"></g>
+                  <g id="occ-xlabels"></g>
+                </svg>
+                <div class="chart-tooltip" id="occ-tooltip"></div>
+              </div>
+            </article>
+
+            <!-- Zone Utilization Panel -->
+            <article class="card">
+              <div class="card-header">
+                <h2 class="card-title">Zone Utilization</h2>
+                <span class="text-xs text-muted">Live — updated every 5 min</span>
+              </div>
+              <div style="display:flex; flex-direction:column; gap: var(--space-15);">
+                <div class="occ-zone-row">
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                    <span class="text-sm font-medium">Main Office</span>
+                    <span class="text-sm font-semibold">78% <span class="text-xs text-muted">(156/200)</span></span>
+                  </div>
+                  <div class="health-bar-track"><div class="health-bar-fill" style="width:78%; background: var(--color-accent);"></div></div>
+                </div>
+                <div class="occ-zone-row">
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                    <span class="text-sm font-medium">Conference Rooms</span>
+                    <span class="text-sm font-semibold">45% <span class="text-xs text-muted">(18/40)</span></span>
+                  </div>
+                  <div class="health-bar-track"><div class="health-bar-fill" style="width:45%; background: var(--color-warning);"></div></div>
+                </div>
+                <div class="occ-zone-row">
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                    <span class="text-sm font-medium">Open Workspace</span>
+                    <span class="text-sm font-semibold">62% <span class="text-xs text-muted">(62/100)</span></span>
+                  </div>
+                  <div class="health-bar-track"><div class="health-bar-fill" style="width:62%; background: var(--color-accent);"></div></div>
+                </div>
+                <div class="occ-zone-row">
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                    <span class="text-sm font-medium">Meeting Rooms</span>
+                    <span class="text-sm font-semibold">38% <span class="text-xs text-muted">(19/50)</span></span>
+                  </div>
+                  <div class="health-bar-track"><div class="health-bar-fill" style="width:38%; background: var(--color-danger); opacity:0.7;"></div></div>
+                </div>
+                <div class="occ-zone-row">
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                    <span class="text-sm font-medium">Break Area</span>
+                    <span class="text-sm font-semibold">29% <span class="text-xs text-muted">(7/25)</span></span>
+                  </div>
+                  <div class="health-bar-track"><div class="health-bar-fill" style="width:29%; background: var(--color-text-secondary);"></div></div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="grid-column">
+            <!-- Occupancy Alerts -->
+            <article class="card">
+              <div class="card-header">
+                <h2 class="card-title">Live Alerts</h2>
+                <span class="badge badge-success">Normal</span>
+              </div>
+              <div style="display:flex; flex-direction:column; gap: var(--space-15);">
+                <div class="insight-item">
+                  <div class="insight-dot" style="background: var(--color-success);"></div>
+                  <div><span class="text-sm font-medium">Cafeteria Capacity Normal</span><br><span class="text-xs text-muted">Currently at 45%</span></div>
+                </div>
+                <div class="insight-item">
+                  <div class="insight-dot" style="background: var(--color-success);"></div>
+                  <div><span class="text-sm font-medium">Air Quality Optimal</span><br><span class="text-xs text-muted">CO2 levels below 600ppm</span></div>
+                </div>
+              </div>
+            </article>
+          </div>
+
+          <div class="grid-column">
+            <!-- Occupancy Analytics -->
+            <article class="card">
+              <div class="card-header">
+                <h2 class="card-title">Occupancy Analytics</h2>
+                <span class="text-xs text-muted">MTD Stats</span>
+              </div>
+              <div style="display:grid; grid-template-columns: 1fr 1fr; gap: var(--space-2);">
+                <div class="occ-stat-card">
+                  <span class="text-xs text-muted">Peak Hours</span>
+                  <span class="occ-stat-value">10 AM–2 PM</span>
+                </div>
+                <div class="occ-stat-card">
+                  <span class="text-xs text-muted">Busiest Day</span>
+                  <span class="occ-stat-value">Tuesday</span>
+                </div>
+                <div class="occ-stat-card">
+                  <span class="text-xs text-muted">Avg. Daily Users</span>
+                  <span class="occ-stat-value">317</span>
+                </div>
+                <div class="occ-stat-card">
+                  <span class="text-xs text-muted">No-show Rate</span>
+                  <span class="occ-stat-value" style="color: var(--color-warning);">18.4%</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- Recommendations -->
+            <article class="card">
+              <div class="card-header">
+                <h2 class="card-title">Space Recommendations</h2>
+                <span class="badge badge-primary" id="occ-actions-count">3 Available</span>
+              </div>
+              <div class="recommendations-list">
+                <div class="recommendation-item" id="orec-meeting">
+                  <div class="recommendation-info">
+                    <div class="recommendation-icon" style="background: rgba(16,185,129,0.1); color: var(--color-success);">
+                      <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+                    </div>
+                    <div class="recommendation-details">
+                      <span class="recommendation-text">Reallocate 4 meeting rooms to hot-desk pods</span>
+                      <div class="recommendation-meta">
+                        <span class="recommendation-savings">+14% capacity</span><span>•</span><span>Space Mgmt</span>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="btn btn-secondary btn-sm" onclick="applyOccRec('orec-meeting', '4 meeting rooms flagged for reallocation planning. Facilities team notified.')">
+                    <span class="btn-loader"></span><span class="btn-text-content">Apply</span>
+                  </button>
+                </div>
+                <div class="recommendation-item" id="orec-desk">
+                  <div class="recommendation-info">
+                    <div class="recommendation-icon" style="background: rgba(14,165,233,0.1); color: var(--color-accent);">
+                      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>
+                    </div>
+                    <div class="recommendation-details">
+                      <span class="recommendation-text">Adjust desk allocation — reduce Level 3 by 20%</span>
+                      <div class="recommendation-meta">
+                        <span class="recommendation-savings">Save: $2,400/mo</span><span>•</span><span>Desk Mgmt</span>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="btn btn-secondary btn-sm" onclick="applyOccRec('orec-desk', 'Level 3 desk count reduced by 20%. Space repurposed for collaborative zones.')">
+                    <span class="btn-loader"></span><span class="btn-text-content">Apply</span>
+                  </button>
+                </div>
+                <div class="recommendation-item" id="orec-workspace">
+                  <div class="recommendation-info">
+                    <div class="recommendation-icon" style="background: rgba(139,92,246,0.1); color:#8B5CF6;">
+                      <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+                    </div>
+                    <div class="recommendation-details">
+                      <span class="recommendation-text">Open workspace layout optimization — East cluster</span>
+                      <div class="recommendation-meta">
+                        <span class="recommendation-savings">+22% density</span><span>•</span><span>Layout</span>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="btn btn-secondary btn-sm" onclick="applyOccRec('orec-workspace', 'East cluster workspace layout reconfiguration plan generated. Draft ready for FM review.')">
+                    <span class="btn-loader"></span><span class="btn-text-content">Apply</span>
+                  </button>
+                </div>
+              </div>
+            </article>
+
+            <!-- Key Insights -->
+            <article class="card">
+              <div class="card-header">
+                <h2 class="card-title">Key Insights</h2>
+                <span class="text-xs text-muted">AI Generated</span>
+              </div>
+              <div style="display:flex; flex-direction:column; gap: var(--space-15);">
+                <div class="insight-item">
+                  <div class="insight-dot" style="background: var(--color-accent);"></div>
+                  <div><span class="text-sm font-medium">Average utilization: 68.4% (up 3.2%)</span><br><span class="text-xs text-muted">Consistent improvement over 4-week trend</span></div>
+                </div>
+                <div class="insight-item">
+                  <div class="insight-dot" style="background: var(--color-warning);"></div>
+                  <div><span class="text-sm font-medium">6 underutilized areas identified</span><br><span class="text-xs text-muted">Meeting rooms &lt;40% utilized 3 weeks running</span></div>
+                </div>
+                <div class="insight-item">
+                  <div class="insight-dot" style="background: var(--color-success);"></div>
+                  <div><span class="text-sm font-medium">Layout optimizations: 3 opportunities found</span><br><span class="text-xs text-muted">Potential to increase effective capacity by 18%</span></div>
+                </div>
+              </div>
+            </article>
+
+            <!-- Occupancy Console -->
+            <article class="card console-card">
+              <div class="console-header">
+                <div class="console-title-wrap">
+                  <div class="brand-icon" style="background: linear-gradient(135deg,#059669,#10B981); width: 28px; height: 28px;">
+                    <svg viewBox="0 0 24 24" style="width: 14px; height: 14px;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" fill="none" stroke="white" stroke-width="2.5"></path><circle cx="9" cy="7" r="4" fill="none" stroke="white" stroke-width="2.5"></circle></svg>
+                  </div>
+                  <h2 class="card-title">Occupancy Agent Console</h2>
+                  <span class="badge badge-success">Running</span>
+                </div>
+              </div>
+              <div class="console-container" id="occ-console-log">
+                <div class="console-line">
+                  <span class="console-time">[Boot]</span>
+                  <span class="console-agent" style="color: var(--color-success);">OccupancyAgent:</span>
+                  <span class="console-text">Agent initialized. Polling 32 occupancy sensors across 5 zones...</span>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================================================================
+           MISSING VIEWS
+           ================================================================ -->
+      <!-- Overview -->
+      <section class="dashboard-content agent-view" id="view-overview" style="display:none;">
+        <div class="welcome-section"><div class="welcome-info"><h1>Overview</h1><p class="text-sm text-muted">Summary of key metrics and recent activities.</p></div></div>
+        <div class="kpis-grid">
+          <div class="card kpi-card"><div class="kpi-title-row"><span>Total Assets</span></div><div><div class="kpi-value">1,250</div></div></div>
+          <div class="card kpi-card"><div class="kpi-title-row"><span>Active Agents</span></div><div><div class="kpi-value text-success">12</div></div></div>
+          <div class="card kpi-card"><div class="kpi-title-row"><span>Today's Alerts</span></div><div><div class="kpi-value text-danger">5</div></div></div>
+          <div class="card kpi-card"><div class="kpi-title-row"><span>Performance</span></div><div><div class="kpi-value text-success">92%</div></div></div>
+        </div>
+        <div class="dashboard-grid" style="margin-top:var(--space-3);">
+          <div class="grid-column"><article class="card"><div class="card-header"><h2 class="card-title">Performance Overview</h2></div><div class="chart-container" style="background:var(--color-hover); border-radius:var(--radius-sm); height:200px; display:flex; align-items:center; justify-content:center;"><span class="text-muted">Chart Data</span></div></article></div>
+          <div class="grid-column"><article class="card"><div class="card-header"><h2 class="card-title">Recent Activity</h2></div><div style="display:flex; flex-direction:column; gap:12px;"><div class="insight-item"><div class="insight-dot" style="background:var(--color-success);"></div><div><span class="text-sm">Maintenance completed</span><br><span class="text-xs text-muted">1 hr ago</span></div></div><div class="insight-item"><div class="insight-dot" style="background:var(--color-warning);"></div><div><span class="text-sm">Energy usage spike</span><br><span class="text-xs text-muted">2 hrs ago</span></div></div></div></article></div>
+        </div>
+      </section>
+
+      <!-- AI Agents -->
+      <section class="dashboard-content agent-view" id="view-ai-agents" style="display:none;">
+        <div class="welcome-section"><div class="welcome-info"><h1>AI Agents</h1><p class="text-sm text-muted">Manage and monitor all AI agents from one place.</p></div></div>
+        <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--space-3);">
+           <article class="card"><div class="card-header"><h2 class="card-title">Energy Agent</h2><span class="badge badge-success">Active</span></div></article>
+           <article class="card"><div class="card-header"><h2 class="card-title">Maintenance Agent</h2><span class="badge badge-success">Active</span></div></article>
+           <article class="card"><div class="card-header"><h2 class="card-title">Occupancy Agent</h2><span class="badge badge-success">Active</span></div></article>
+           <article class="card"><div class="card-header"><h2 class="card-title">Security Agent</h2><span class="badge badge-success">Active</span></div></article>
+           <article class="card"><div class="card-header"><h2 class="card-title">Cleaning Agent</h2><span class="badge badge-success">Active</span></div></article>
+           <article class="card"><div class="card-header"><h2 class="card-title">Parking Agent</h2><span class="badge badge-success">Active</span></div></article>
+           <article class="card"><div class="card-header"><h2 class="card-title">Water Management</h2><span class="badge badge-success">Active</span></div></article>
+        </div>
+      </section>
+
+      <!-- Modules -->
+      <section class="dashboard-content agent-view" id="view-modules" style="display:none;">
+        <div class="welcome-section"><div class="welcome-info"><h1>Modules</h1><p class="text-sm text-muted">Access and manage all facility modules.</p></div></div>
+        <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--space-3);">
+           <article class="card"><div class="card-header"><h2 class="card-title">Energy Management</h2></div></article>
+           <article class="card"><div class="card-header"><h2 class="card-title">Security</h2></div></article>
+           <article class="card"><div class="card-header"><h2 class="card-title">Maintenance</h2></div></article>
+           <article class="card"><div class="card-header"><h2 class="card-title">Inventory</h2></div></article>
+           <article class="card"><div class="card-header"><h2 class="card-title">Parking</h2></div></article>
+           <article class="card"><div class="card-header"><h2 class="card-title">Cleaning</h2></div></article>
+           <article class="card"><div class="card-header"><h2 class="card-title">Water Management</h2></div></article>
+           <article class="card"><div class="card-header"><h2 class="card-title">HVAC Management</h2></div></article>
+        </div>
+      </section>
+
+      <!-- Work Orders -->
+      <section class="dashboard-content agent-view" id="view-work-orders" style="display:none;">
+        <div class="welcome-section"><div class="welcome-info"><h1>Work Orders</h1><p class="text-sm text-muted">Create, track and manage maintenance work orders.</p></div></div>
+        <article class="card">
+          <table style="width:100%; border-collapse:collapse; text-align:left; font-size:0.875rem;">
+            <tr style="border-bottom:1px solid var(--color-border);"><th style="padding:12px;">ID</th><th>Asset</th><th>Priority</th><th>Status</th><th>Assigned To</th><th>Due Date</th></tr>
+            <tr style="border-bottom:1px solid var(--color-border-light);"><td style="padding:12px;">#WO-101</td><td>AC Unit</td><td><span class="badge badge-danger">High</span></td><td>In Progress</td><td>John Doe</td><td>12 May</td></tr>
+            <tr style="border-bottom:1px solid var(--color-border-light);"><td style="padding:12px;">#WO-102</td><td>Lift 1</td><td><span class="badge badge-warning">Medium</span></td><td>Pending</td><td>Jane Smith</td><td>13 May</td></tr>
+          </table>
+        </article>
+      </section>
+
+      <!-- Assets -->
+      <section class="dashboard-content agent-view" id="view-assets" style="display:none;">
+        <div class="welcome-section"><div class="welcome-info"><h1>Assets</h1><p class="text-sm text-muted">Manage all building assets and their status.</p></div></div>
+        <div class="kpis-grid">
+          <div class="card kpi-card"><div class="kpi-title-row"><span>Total Assets</span></div><div class="kpi-value">1,250</div></div>
+          <div class="card kpi-card"><div class="kpi-title-row"><span>Healthy</span></div><div class="kpi-value text-success">1,050</div></div>
+          <div class="card kpi-card"><div class="kpi-title-row"><span>Warning</span></div><div class="kpi-value text-warning">120</div></div>
+          <div class="card kpi-card"><div class="kpi-title-row"><span>Critical</span></div><div class="kpi-value text-danger">80</div></div>
+        </div>
+        <article class="card" style="margin-top:var(--space-3);">
+          <table style="width:100%; border-collapse:collapse; text-align:left; font-size:0.875rem;">
+            <tr style="border-bottom:1px solid var(--color-border);"><th style="padding:12px;">Asset</th><th>Type</th><th>Status</th><th>Location</th></tr>
+            <tr style="border-bottom:1px solid var(--color-border-light);"><td style="padding:12px;">AC-2023</td><td>HVAC</td><td><span class="badge badge-success">Healthy</span></td><td>Floor 1</td></tr>
+            <tr style="border-bottom:1px solid var(--color-border-light);"><td style="padding:12px;">Lift-1</td><td>Elevator</td><td><span class="badge badge-warning">Warning</span></td><td>Lobby</td></tr>
+            <tr style="border-bottom:1px solid var(--color-border-light);"><td style="padding:12px;">Camera-2B</td><td>CCTV</td><td><span class="badge badge-danger">Offline</span></td><td>Floor 2</td></tr>
+          </table>
+        </article>
+      </section>
+
+      <!-- Monitoring -->
+      <section class="dashboard-content agent-view" id="view-monitoring" style="display:none;">
+        <div class="welcome-section"><div class="welcome-info"><h1>Monitoring</h1><p class="text-sm text-muted">Real-time monitoring of systems and facilities.</p></div></div>
+        <div class="kpis-grid">
+          <div class="card kpi-card"><div class="kpi-title-row"><span>Temperature</span></div><div class="kpi-value">24°C</div></div>
+          <div class="card kpi-card"><div class="kpi-title-row"><span>Energy</span></div><div class="kpi-value">12,450 kWh</div></div>
+          <div class="card kpi-card"><div class="kpi-title-row"><span>Water</span></div><div class="kpi-value">320 L</div></div>
+          <div class="card kpi-card"><div class="kpi-title-row"><span>Air Quality</span></div><div class="kpi-value text-success">Good</div></div>
+        </div>
+      </section>
+
+      <!-- Analytics -->
+      <section class="dashboard-content agent-view" id="view-analytics" style="display:none;">
+        <div class="welcome-section"><div class="welcome-info"><h1>Analytics</h1><p class="text-sm text-muted">Analyze data and generate insights.</p></div></div>
+        <div class="dashboard-grid">
+          <div class="grid-column">
+             <article class="card"><div class="card-header"><h2 class="card-title">Energy Consumption</h2></div><div class="chart-container" style="background:var(--color-hover); border-radius:var(--radius-sm); height:200px; display:flex; align-items:center; justify-content:center;"><span class="text-muted">Chart Data</span></div></article>
+          </div>
+          <div class="grid-column">
+             <article class="card"><div class="card-header"><h2 class="card-title">Insights</h2></div><div><div class="kpi-value text-success">$12,450</div><span class="text-xs text-muted">Cost Savings</span></div><div style="margin-top:12px;"><div class="kpi-value text-success">87%</div><span class="text-xs text-muted">Efficiency</span></div></article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Reports -->
+      <section class="dashboard-content agent-view" id="view-reports" style="display:none;">
+        <div class="welcome-section"><div class="welcome-info"><h1>Reports</h1><p class="text-sm text-muted">Generate and download various reports.</p></div></div>
+        <article class="card">
+          <table style="width:100%; border-collapse:collapse; text-align:left; font-size:0.875rem;">
+            <tr style="border-bottom:1px solid var(--color-border);"><th style="padding:12px;">Report Name</th><th>Type</th><th>Date</th></tr>
+            <tr style="border-bottom:1px solid var(--color-border-light);"><td style="padding:12px;">Energy Report</td><td>PDF</td><td>10 May</td></tr>
+            <tr style="border-bottom:1px solid var(--color-border-light);"><td style="padding:12px;">Maintenance Report</td><td>PDF</td><td>09 May</td></tr>
+          </table>
+        </article>
+      </section>
+
+      <!-- Alerts -->
+      <section class="dashboard-content agent-view" id="view-alerts" style="display:none;">
+        <div class="welcome-section"><div class="welcome-info"><h1>Alerts</h1><p class="text-sm text-muted">View and manage system alerts and notifications.</p></div></div>
+        <article class="card">
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            <div class="alert-item critical"><div class="alert-item-body"><span class="alert-desc">Water leakage detected</span><span class="alert-time">Floor 2</span></div></div>
+            <div class="alert-item warning"><div class="alert-item-body"><span class="alert-desc">Elevator malfunction</span><span class="alert-time">Lift 1</span></div></div>
+            <div class="alert-item warning"><div class="alert-item-body"><span class="alert-desc">High energy usage</span><span class="alert-time">Floor 3</span></div></div>
+            <div class="alert-item info"><div class="alert-item-body"><span class="alert-desc">Door left open</span><span class="alert-time">Main Gate</span></div></div>
+          </div>
+        </article>
+      </section>
+
+      <!-- Schedules -->
+      <section class="dashboard-content agent-view" id="view-schedules" style="display:none;">
+        <div class="welcome-section"><div class="welcome-info"><h1>Schedules</h1><p class="text-sm text-muted">Manage and view maintenance schedules.</p></div></div>
+        <article class="card">
+          <table style="width:100%; border-collapse:collapse; text-align:left; font-size:0.875rem;">
+            <tr style="border-bottom:1px solid var(--color-border);"><th style="padding:12px;">Date</th><th>Activity</th><th>Time</th><th>Status</th></tr>
+            <tr style="border-bottom:1px solid var(--color-border-light);"><td style="padding:12px;">13 May</td><td>AC Maintenance</td><td>09:00 AM</td><td><span class="badge badge-success">Completed</span></td></tr>
+            <tr style="border-bottom:1px solid var(--color-border-light);"><td style="padding:12px;">13 May</td><td>Generator Check</td><td>11:00 AM</td><td><span class="badge badge-warning">Pending</span></td></tr>
+          </table>
+        </article>
+      </section>
+
+      <!-- Integrations -->
+      <section class="dashboard-content agent-view" id="view-integrations" style="display:none;">
+        <div class="welcome-section"><div class="welcome-info"><h1>Integrations</h1><p class="text-sm text-muted">Connect and manage third-party integrations.</p></div></div>
+        <div style="display:flex; flex-direction:column; gap:12px;">
+          <article class="card"><div style="display:flex; justify-content:space-between; align-items:center;"><h2 class="card-title">Google Maps</h2><span class="text-success text-sm">Connected</span></div></article>
+          <article class="card"><div style="display:flex; justify-content:space-between; align-items:center;"><h2 class="card-title">IoT Sensors</h2><span class="text-success text-sm">Connected</span></div></article>
+          <article class="card"><div style="display:flex; justify-content:space-between; align-items:center;"><h2 class="card-title">Email Service</h2><span class="text-success text-sm">Connected</span></div></article>
+        </div>
+      </section>
+
+      <!-- Settings -->
+      <section class="dashboard-content agent-view" id="view-settings" style="display:none;">
+        <div class="welcome-section"><div class="welcome-info"><h1>Settings</h1><p class="text-sm text-muted">Manage application settings and preferences.</p></div></div>
+        <article class="card">
+          <div style="display:flex; flex-direction:column; gap:12px;">
+            <div style="padding:12px; border-bottom:1px solid var(--color-border-light); display:flex; justify-content:space-between;"><span>Profile</span></div>
+            <div style="padding:12px; border-bottom:1px solid var(--color-border-light); display:flex; justify-content:space-between;"><span>Password</span></div>
+            <div style="padding:12px; border-bottom:1px solid var(--color-border-light); display:flex; justify-content:space-between;"><span>Notifications</span></div>
+            <div style="padding:12px; border-bottom:1px solid var(--color-border-light); display:flex; justify-content:space-between;"><span>Theme</span></div>
+          </div>
+        </article>
+      </section>
+
+      <!-- Security Agent -->
+      <section class="dashboard-content agent-view" id="view-security" style="display:none;">
+        <div class="welcome-section"><div class="welcome-info"><h1>Security Agent</h1><p class="text-sm text-muted">Monitors security systems and detects anomalies to ensure a safe environment.</p></div></div>
+        <div class="kpis-grid">
+          <div class="card kpi-card"><div class="kpi-title-row"><span>Security Events</span></div><div><div class="kpi-value">120</div></div></div>
+          <div class="card kpi-card"><div class="kpi-title-row"><span>Threat Detection</span></div><div><div class="kpi-value">98.6%</div></div></div>
+          <div class="card kpi-card"><div class="kpi-title-row"><span>Incidents Resolved</span></div><div><div class="kpi-value">15</div></div></div>
+          <div class="card kpi-card"><div class="kpi-title-row"><span>Status</span></div><div><div class="kpi-value text-success">Running</div></div></div>
+        </div>
+        <div class="dashboard-grid" style="margin-top:var(--space-3);">
+          <div class="grid-column">
+            <article class="card"><div class="card-header"><h2 class="card-title">Security Events Trend</h2></div><div class="chart-container" style="background:var(--color-hover); border-radius:var(--radius-sm); height:150px;"></div></article>
+            <article class="card"><div class="card-header"><h2 class="card-title">Security Systems Status</h2></div><div style="display:flex; justify-content:space-around;"><span>CCTV: 48/50</span><span>Access Control: 12/12</span></div></article>
+          </div>
+          <div class="grid-column">
+            <article class="card"><div class="card-header"><h2 class="card-title">Key Insights</h2></div><div>Threat detection accuracy is 98.6%</div></article>
+            <article class="card"><div class="card-header"><h2 class="card-title">Recent Alerts</h2></div><div>Unauthorized access attempt - 2 mins ago</div></article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer style="text-align: center; padding: var(--space-2) var(--space-3); border-top: 1px solid var(--color-border); font-size: 0.8125rem; color: var(--color-text-secondary); background-color: var(--color-card); margin-top: auto;">
+        &copy; 2026 FacilityOps AI Technologies, Inc. Demo Submission.
+      </footer>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
