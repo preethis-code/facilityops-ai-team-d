@@ -1,88 +1,107 @@
-# Agentic FacilityOps AI Platform - Team D
+# 🏢 Agentic FacilityOps AI Platform – Team D
 
-An intelligent multi-agent platform designed to support modern facility operations through autonomous AI agents.
+An intelligent multi-agent facility management platform designed to automate monitoring, maintenance, analytics, and operational workflows through autonomous AI agents.
 
-## Week 3 Milestone – Comprehensive Module Implementation
+---
 
-The Week 3 milestone focuses on fully building and integrating the core facility management modules with professional UI, responsive design, realistic dummy data, interactive elements, and proper navigation, all while preserving the existing project design and structure.
+## ✨ Features
 
-### ✅ Completed Features
+- Multi-Agent Facility Management
+- Real-Time Monitoring Dashboard
+- Asset & Work Order Management
+- Predictive Maintenance Interface
+- Energy & Occupancy Analytics
+- Reports & Alerts Management
+- Responsive Dashboard UI
+- Light/Dark Mode Support
+- Single Page Application (SPA)
 
-- **Fully Functional Views**: Transformed previously stubbed views into complete, polished pages with detailed layouts.
-- **Realistic Data Integration**: Added realistic facility management dummy data across all new modules.
-- **Interactive Components**: Implemented interactive charts, KPI cards, tables with status badges, and dynamic alerts.
-- **Consistent Design Language**: Maintained the existing blue theme, typography, and card-based layout without introducing any breaking changes.
-- **Enhanced Navigation**: Connected all new modules directly into the existing sidebar routing framework.
+---
 
-### 📄 Fully Implemented Modules
+## 🛠 Tech Stack
 
-The following modules have been entirely implemented and integrated into the dashboard:
-- **Overview**: High-level summary of facility health, total energy, active work orders, and recent agent actions.
-- **Dashboard**: Core command center with KPI summaries, AI actions, and active alerts.
-- **AI Agents**: Centralized fleet management view for Energy, Maintenance, Occupancy, Security, and Cleaning agents.
-- **Modules**: Extension marketplace interface for HVAC, Access Control, Inventory, and Smart Parking.
-- **Work Orders**: Comprehensive tracking table with priority badges, status filters, and assignee data.
-- **Assets**: Detailed asset registry with health scores, online statuses, and categorization.
-- **Monitoring**: Real-time telemetry streams, live environmental charts, and zone sensor statuses.
-- **Analytics**: Deep dive insights, energy cost vs baseline comparisons, and savings summaries.
-- **Reports**: Compliance dashboard with scheduled reports and recent actionable downloads.
-- **Alerts**: Centralized notification center with critical, warning, and informational system alerts.
+- HTML5
+- CSS3
+- JavaScript (Vanilla)
 
+---
 
-## Week 2 Milestone – Complete UI & Agent Workflows
+# 📅 Week 3 Milestone
 
-The Week 2 milestone focuses on completing all functional views and integrating the full suite of AI agents into the dashboard, ensuring a comprehensive and responsive facility management UI.
+Completed the core implementation of the FacilityOps platform by building fully functional modules while preserving the existing UI/UX and project architecture.
 
-### ✅ Completed Features
+### ✅ Highlights
 
-- **Expanded Dashboard Navigation**: Added full sidebar categories with active routing logic.
-- **Agent Views Balancing**: Removed unnecessary empty space and balanced layouts by injecting new modules (Live Alerts, Maintenance Schedules) across all agent pages.
-- **Data Displays & Tables**: Implemented comprehensive grid displays and structured tables for Work Orders, Assets, Schedules, and Reports.
-- **Profile Integration**: Updated the active user profile across the system to Team D.
+- Fully implemented facility management modules
+- Interactive dashboards with charts and KPIs
+- Responsive layouts and professional UI
+- Realistic facility management dummy data
+- Status badges, filters, search, and tables
+- Seamless sidebar navigation
+- Consistent blue theme and design language
+- Updated project documentation
 
-### 📄 Implemented Pages
+### 📄 Implemented Modules
 
-The Single-Page Application (SPA) now fully supports the following interactive views:
-- Dashboard (Default view)
-- Overview (KPIs and Recent Activity)
-- AI Agents Directory
-- Modules Overview
-- Work Orders Management
-- Assets Status
-- Facility Monitoring
-- Analytics & Insights
+- Overview
+- Dashboard
+- AI Agents
+- Modules
+- Work Orders
+- Assets
+- Monitoring
+- Analytics
 - Reports
-- Alerts Dashboard
-- Schedules Management
-- Third-Party Integrations
-- Platform Settings
+- Alerts
 
-### 🤖 AI Agents Implemented
+---
 
-All four core autonomous agents are now active and fully designed with dedicated interfaces:
-- **Energy Agent**: Monitors energy trends, costs, and carbon footprint. Includes automated schedules.
-- **Maintenance Agent**: Predicts equipment failure, tracks work orders, and handles upcoming maintenance schedules.
-- **Occupancy Agent**: Tracks space utilization, forecasts zones, and provides live air quality and capacity alerts.
-- **Security Agent**: Monitors CCTV, access control, security events trends, and threat detection accuracy.
+# 📅 Week 2 Milestone
 
-### 🎨 UI/UX Improvements Completed
+Focused on building the application structure and AI agent workflows.
 
-- Dynamic view-switching logic integrated directly into `script.js` enabling seamless transitions without page reloads.
-- Removed unnecessary white space on agent pages by re-balancing grid columns with newly designed widgets.
-- Consistent typography, animations, SVG iconography, and color schemes maintained across all 13+ new views.
-- Fully responsive layout with Light/Dark mode support.
+### ✅ Completed
 
-### 📊 Current Project Status
+- Sidebar navigation
+- Dashboard layout
+- AI Agent interfaces
+- SPA routing
+- Work Orders
+- Assets
+- Monitoring
+- Analytics
+- Reports
+- Alerts
+- Schedules
+- Integrations
+- Settings
+- Team D profile integration
+- Responsive layout improvements
 
-The frontend prototype is fully complete with all required UI components, pages, and interactive features working locally. The Week 3 milestone brings the platform to a near-production-ready frontend state. The platform relies on vanilla frontend technologies and requires no build step to run.
+---
 
-### 🛠️ Tech Stack
+## 🤖 AI Agents
 
-- **HTML5**: Semantic structure and SVG icon integration.
-- **CSS3**: Custom design system using CSS Variables (Vanilla), Flexbox, and CSS Grid.
-- **JavaScript (Vanilla)**: DOM manipulation, interactive charts, and SPA routing logic.
+- ⚡ Energy Agent
+- 🔧 Maintenance Agent
+- 👥 Occupancy Agent
+- 🛡 Security Agent
 
-### 🚀 Next Milestone
+---
 
-- Connect frontend views to a backend API/database.
-- Integrate real-time data streaming for the AI Agent dashboards.
+## 📊 Project Status
+
+- ✅ Frontend implementation completed
+- ✅ Interactive UI modules integrated
+- ✅ Week 3 milestone completed
+- 🔄 Backend integration planned
+
+---
+
+## 🚀 Next Steps
+
+- Backend API integration
+- Database connectivity
+- Authentication
+- Real-time sensor data
+- AI agent automation
